@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('livingtownApp', [])
+angular.module('livingtownApp', ['leaflet-directive'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
