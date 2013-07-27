@@ -31,21 +31,23 @@
 
     </div>
 
+    <script src="scripts/vendor/cordova.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-
     <script src="bower_components/angular/angular.js"></script>
     <script src="scripts/vendor/angular-leaflet-directive.js"></script>
-
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/geolocation.js"></script>
+    <script src="scripts/services/mock_data.js"></script>
+    <script src="scripts/models/message.js"></script>
     <!-- endbuild -->
 
 
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>
         <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
         <script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
         <script src="bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>
@@ -65,6 +67,5 @@
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="scripts/services/cordovaReady.js"></script>
         <!-- endbuild -->
-<script src="scripts/vendor/cordova.js"></script>
 </body>
 </html>

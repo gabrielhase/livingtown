@@ -362,9 +362,20 @@ leafletDirective.directive('leaflet', [
                         draggable: data.draggable ? true : false
                     }
                 );
+
+                /*
                 if (data.message) {
                     marker.bindPopup(data.message);
                 }
+                */
+
+                if (data.clickCallback) {
+                    marker.on('click', function() {
+                        data.clickCallback.call(this, data);
+                    });
+                }
+
+
                 return marker;
             }
 

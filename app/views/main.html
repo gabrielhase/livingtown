@@ -1,3 +1,11 @@
-<div ng-show='located'>
-<leaflet defaults="defaults" center="center" height="480px" width="640px"></leaflet>
+<div style='width: 320px; position: relative'>
+  <div ng-show='located'>
+    <leaflet defaults="defaults" center="center" height="240px" width="320px" markers="markers"></leaflet>
+  </div>
+  <br/>
+  <ul class='unstyled' style='height: 240px; overflow: scroll' id='messageStream'>
+    <li ng-repeat='marker in markers' class='well' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='{{marker.id}}'>
+      {{marker.message}}
+    </li>
+  </ul>
 </div>
