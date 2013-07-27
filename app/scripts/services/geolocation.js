@@ -8,14 +8,11 @@ angular.module('livingtownApp')
 
     return {
       getCurrentPosition: cordovaReady(function (options, locationPromise) {
-        console.log("calling navigator API");
         navigator.geolocation.getCurrentPosition(function (position) {
-          console.log("got position");
           $rootScope.$apply(function() {
             locationPromise.resolve(position);
           });
         }, function () {
-          console.log("did not get position");
           $rootScope.$apply(function() {
             locationPromise.reject('Could not get device location. Please enable location services on your device.');
           });

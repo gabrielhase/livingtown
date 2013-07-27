@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('livingtownApp')
-  .controller('MainCtrl', function ($scope, geolocation, mockData) {
+  .controller('MainCtrl', function ($scope, $location, geolocation, mockData) {
 
     // init leaflet empty
     $scope.center = {}
@@ -20,6 +20,6 @@ angular.module('livingtownApp')
             located: true
         });
       }, function(error) {
-        alert('failed with error: ' + error);
+        $location.path( "/needLocation" );
       });
   });
