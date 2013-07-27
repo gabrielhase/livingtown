@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('livingtownApp', ['leaflet-directive'])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -14,4 +14,7 @@ angular.module('livingtownApp', ['leaflet-directive'])
       .otherwise({
         redirectTo: '/'
       });
+
+    // so requests from localhost work
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });
