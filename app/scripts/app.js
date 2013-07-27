@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('livingtownApp', ['leaflet-directive'])
+angular.module('livingtownApp', ['leaflet-directive', 'firebase'])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/', {
