@@ -22,4 +22,11 @@ angular.module('livingtownApp')
       }, function(error) {
         $location.path( "/needLocation" );
       });
+
+    // center a location (upon clicking a message)
+    $scope.centerLocation = function(marker) {
+      $scope.center.lat = marker.lat;
+      $scope.center.lng = marker.lng;
+    };
+
   });

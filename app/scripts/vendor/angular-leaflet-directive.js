@@ -1,3 +1,7 @@
+/*
+  Based upon https://github.com/tombatossals/angular-leaflet-directive
+  Extended to fit the needs of livingtown
+*/
 var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive('leaflet', [
@@ -356,9 +360,10 @@ leafletDirective.directive('leaflet', [
                 } else {
                     micon = buildIcon();
                 }
+
                 var marker = new L.marker(data,
                     {
-                        icon: micon,
+                        icon: new L.NumberedDivIcon({number: data.id}),
                         draggable: data.draggable ? true : false
                     }
                 );

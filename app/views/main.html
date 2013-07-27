@@ -4,8 +4,8 @@
   </div>
   <br/>
   <ul class='unstyled' style='height: 240px; overflow: scroll' id='messageStream'>
-    <li ng-repeat='marker in markers' class='well' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='{{marker.id}}'>
-      {{marker.message}}
+    <li ng-repeat='marker in markers' class='well' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='marker-{{marker.id}}' ng-click='centerLocation(marker)'>
+      <span class="badge">{{marker.id}}</span>&nbsp;{{marker.message}}
     </li>
   </ul>
 </div>
