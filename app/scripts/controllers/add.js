@@ -9,8 +9,12 @@ angular.module('livingtownApp')
             persistence.location.state !== location.state) {
           // re-setup angularFire connection to push message to the right town
           var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
-          angularFire(url, $rootScope, 'messages', []);
-          persistence.init(location);
+          angularFire(url, $rootScope, 'messages', [])
+          .then(function(unbind){
+            if ($rootScope.angularReset) $rootScope.angularReset();
+            $rootScope.angularReset = unbind;
+            persistence.init(location);
+          });
         }
         $scope.located = true; // show the form only when the location is correct
       }, function(error) {

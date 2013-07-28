@@ -12,18 +12,15 @@ angular.module('livingtownApp')
 
 
       locate: function() {
-        console.log('locating...');
         var that = this;
         var locationPromise = $q.defer();
         that.getCurrentPosition({timeout: 5000})
           .then(function(position){
-            console.log('got current position');
             that.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
               .then(function(formattedResult) {
-                console.log(formattedResult);
                 // TODO: for the mock data
-                formattedResult.city = "Cambridge";
-                formattedResult.state = "MA";
+                //formattedResult.city = "Cambridge";
+                //formattedResult.state = "MA";
                 // add the lat, lng
                 formattedResult.lat = position.coords.latitude;
                 formattedResult.lng = position.coords.longitude;
@@ -48,6 +45,21 @@ angular.module('livingtownApp')
 
       getCurrentPosition: cordovaReady(function (options, locationPromise) {
         navigator.geolocation.getCurrentPosition(function (position) {
+
+/*
+          console.log(position.coords);
+          // TODO: hack code to test changing town
+          if (Math.random() > 0.5) { // sometimes place in Boston
+            position = undefined;
+            position = {
+              coords: {
+                latitude: 42.359935,
+                longitude: -71.057159
+              }
+            }
+            console.log("haaaack!");
+          }
+*/
           $rootScope.$apply(function() {
             locationPromise.resolve(position);
           });

@@ -17,7 +17,9 @@ angular.module('livingtownApp')
       // get messages from firebase
       var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
       angularFire(url, $rootScope, 'messages', [])
-        .then(function() {
+        .then(function(unbind) {
+          if ($rootScope.angularReset) $rootScope.angularReset();
+          $rootScope.angularReset = unbind;
           $rootScope.angularFireIsRunning = true;
           $rootScope.$watch('messages', function() {
             drawMarkers($scope, $rootScope);
@@ -31,8 +33,30 @@ angular.module('livingtownApp')
       $scope.center.lng = marker.lng;
     };
 
-    // => main code
-    // locate the user
+
+    $scope.reLocate = function() {
+      geolocation.locate()
+      .then(function(location) {
+        if (persistence.location.city !== location.city ||
+            persistence.location.state !== location.state) {
+          persistence.init(location);
+          setupMarkerListener(location);
+        }
+        // just change the location on the map
+        $scope.center.lat = location.lat;
+        $scope.center.lng = location.lng;
+
+      }, function(error) {
+        if(error.type === 'notLocalizable') {
+          $location.path( "/needLocation" );
+        } else {
+          alert(error.message);
+        }
+      });
+    };
+
+
+    // locate the user on hitting the page
     geolocation.locate()
       .then(function(location) {
         angular.extend($scope, {
@@ -43,7 +67,7 @@ angular.module('livingtownApp')
           },
           located: true
         });
-        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope);
+        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope); // when coming back from another page
         persistence.init(location);
         setupMarkerListener(location);
       }, function(error) {
@@ -65,7 +89,6 @@ var scrollCallback = function(marker) {
 
 
 function drawMarkers($scope, $rootScope) {
-  console.log("drawing markers...");
   // reformat messages for leaflet markers
   var markers = {};
   for (var i = 0; i < $rootScope.messages.length; i++) {
