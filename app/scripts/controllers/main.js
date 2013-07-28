@@ -1,7 +1,12 @@
 'use strict';
 
+/*
+  Note: The messages are stored on the $rootScope so they can be:
+  (1) accessed from all controllers
+  (2) angularFire (firebase) has one point of control to update them
+*/
 angular.module('livingtownApp')
-  .controller('MainCtrl', function ($scope, $location, geolocation, mockData, angularFire) {
+  .controller('MainCtrl', function ($scope, $rootScope, $location, geolocation, mockData, angularFire, persistence) {
 
     // init leaflet empty
     $scope.center = {};
@@ -11,11 +16,17 @@ angular.module('livingtownApp')
     var setupPersistence = function(location) {
       // get messages from firebase
       var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
-      var realTimePromise = angularFire(url, $scope, 'messages', []);
-
-      realTimePromise.then(function() {
-        startWatch($scope);
-      });
+      angularFire(url, $rootScope, 'messages', [])
+        .then(function() {
+          console.log('real time promise triggered');
+          persistence.init(location.lat, location.lng, url);
+          $rootScope.angularFireIsRunning = true;
+          $rootScope.$watch('messages', function() {
+            console.log('messages changed!');
+            console.log($rootScope.messages);
+            drawMarkers($scope, $rootScope);
+          });
+        });
     };
 
     // center a location (upon clicking a message)
@@ -26,28 +37,24 @@ angular.module('livingtownApp')
 
     // => main code
     // locate the user
-    geolocation.getCurrentPosition({timeout: 5000})
-      .then(function(position){
-        geolocation.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
-          .then(function(formattedResult) {
-            console.log(formattedResult);
-            // TODO: for the mock data
-            formattedResult.city = "Cambridge";
-            formattedResult.state = "MA";
-            angular.extend($scope, {
-              center: {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-                zoom: 12
-              },
-              located: true
-            });
-            setupPersistence(formattedResult);
-          }, function(error) {
-            alert(error);
-          })
+    geolocation.locate()
+      .then(function(location) {
+        angular.extend($scope, {
+          center: {
+            lat: location.lat,
+            lng: location.lng,
+            zoom: 12
+          },
+          located: true
+        });
+        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope);
+        setupPersistence(location);
       }, function(error) {
-        $location.path( "/needLocation" );
+        if(error.type === 'notLocalizable') {
+          $location.path( "/needLocation" );
+        } else {
+          alert(error.message);
+        }
       });
   });
 
@@ -60,18 +67,14 @@ var scrollCallback = function(marker) {
 };
 
 
-// events for our persisted objects
-function startWatch($scope) {
-
-  $scope.$watch('messages', function() {
-    // reformat messages for leaflet markers
-    var markers = {};
-    for (var i = 0; i < $scope.messages.length; i++) {
-      markers[i] = $scope.messages[i];
-      markers[i].id = i + 1;
-      markers[i].clickCallback = scrollCallback;
-    }
-    $scope.markers = markers;
-  });
-
+function drawMarkers($scope, $rootScope) {
+  console.log("drawing markers...");
+  // reformat messages for leaflet markers
+  var markers = {};
+  for (var i = 0; i < $rootScope.messages.length; i++) {
+    markers[i] = $rootScope.messages[i];
+    markers[i].id = i + 1;
+    markers[i].clickCallback = scrollCallback;
+  }
+  $scope.markers = markers;
 }

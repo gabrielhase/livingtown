@@ -10,6 +10,40 @@ angular.module('livingtownApp')
 
     return {
 
+
+      locate: function() {
+        var that = this;
+        var locationPromise = $q.defer();
+        that.getCurrentPosition({timeout: 5000})
+          .then(function(position){
+            that.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
+              .then(function(formattedResult) {
+                console.log(formattedResult);
+                // TODO: for the mock data
+                formattedResult.city = "Cambridge";
+                formattedResult.state = "MA";
+                // add the lat, lng
+                formattedResult.lat = position.coords.latitude;
+                formattedResult.lng = position.coords.longitude;
+
+                locationPromise.resolve(formattedResult);
+              }, function(errorMsg) {
+                locationPromise.reject({
+                  type: 'locationNotFound',
+                  message: errorMsg
+                });
+              })
+          }, function(error) {
+            locationPromise.reject({
+              type: 'notLocalizable',
+              message: 'Could not localize this device'
+            });
+          });
+
+        return locationPromise.promise;
+      },
+
+
       getCurrentPosition: cordovaReady(function (options, locationPromise) {
         navigator.geolocation.getCurrentPosition(function (position) {
           $rootScope.$apply(function() {
