@@ -12,10 +12,12 @@ angular.module('livingtownApp')
 
 
       locate: function() {
+        console.log('locating...');
         var that = this;
         var locationPromise = $q.defer();
         that.getCurrentPosition({timeout: 5000})
           .then(function(position){
+            console.log('got current position');
             that.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
               .then(function(formattedResult) {
                 console.log(formattedResult);

@@ -13,17 +13,13 @@ angular.module('livingtownApp')
     $scope.markers = {};
 
     // setup the angularFire connection to our firebase for this city
-    var setupPersistence = function(location) {
+    var setupMarkerListener = function(location) {
       // get messages from firebase
       var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
       angularFire(url, $rootScope, 'messages', [])
         .then(function() {
-          console.log('real time promise triggered');
-          persistence.init(location.lat, location.lng, url);
           $rootScope.angularFireIsRunning = true;
           $rootScope.$watch('messages', function() {
-            console.log('messages changed!');
-            console.log($rootScope.messages);
             drawMarkers($scope, $rootScope);
           });
         });
@@ -48,7 +44,8 @@ angular.module('livingtownApp')
           located: true
         });
         if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope);
-        setupPersistence(location);
+        persistence.init(location);
+        setupMarkerListener(location);
       }, function(error) {
         if(error.type === 'notLocalizable') {
           $location.path( "/needLocation" );

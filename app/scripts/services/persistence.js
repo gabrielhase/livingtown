@@ -1,17 +1,16 @@
 'use strict';
 
+/*
+  Singleton with the sole purpose to store the current location literal.
+  Can be injected so different controllers can check if the user is now
+  in a different town (e.g. when driving around).
+*/
 angular.module('livingtownApp')
   .factory('persistence', function() {
 
     return {
-
-      // these are necessary for persistence -> in closure
-      //var lat, lng, location, messages;
-
-      init: function(lat, lng, url) {
-        this.lat = lat;
-        this.lng = lng;
-        this.url = url;
+      init: function(location) {
+        this.location = location;
       }
     }
 
