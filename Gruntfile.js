@@ -245,7 +245,9 @@ module.exports = function (grunt) {
             '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{gif,webp,svg}',
-            'styles/fonts/*'
+            'styles/fonts/*',
+            'scripts/vendor/**/*',
+            'cordova_plugins.js' // not having it there throws an error in cordova 3 which should be fixed with the next release: https://github.com/clelland/cordova-js/commit/c21a9f264af9e858e31b11aead43641e739749ff
           ]
         }, {
           expand: true,
@@ -277,11 +279,6 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
-      }
-    },
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
       }
     },
     ngmin: {
@@ -332,7 +329,6 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'concat',
     'copy',
-    'cdnify',
     'ngmin',
     'cssmin',
     'uglify',

@@ -33,6 +33,7 @@ angular.module('livingtownApp')
             console.log(formattedResult);
             // TODO: for the mock data
             formattedResult.city = "Cambridge";
+            formattedResult.state = "MA";
             angular.extend($scope, {
               center: {
                 lat: position.coords.latitude,
