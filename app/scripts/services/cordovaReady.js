@@ -21,6 +21,7 @@ angular.module('livingtownApp')
 
       document.addEventListener('deviceready', function () {
 
+        //alert(navigator.camera);
         // mock a camera object if it is not there
         if (!navigator.camera) {
           alert('mocking camera');

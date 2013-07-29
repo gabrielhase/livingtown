@@ -6,14 +6,14 @@ angular.module('livingtownApp')
     return {
 
       takePhoto: cordovaReady(function(photoPromise) {
-        console.log(navigator);
+        //console.log(navigator);
         navigator.camera.getPicture(function(imageURI) {
           console.log('success');
           photoPromise.resolve('success');
         }, function() {
           console.log('fail');
           photoPromise.reject('fail');
-        }, {quality: 50, sourceType: Camera.PictureSourceType.PHOTOLIBRARY, destinationType: Camera.destinationType.FILE_URI});
+        }, {quality: 50, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY, destinationType: navigator.camera.DestinationType.FILE_URI});
         return photoPromise.promise;
       })
     }

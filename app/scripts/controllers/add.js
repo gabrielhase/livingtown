@@ -31,7 +31,10 @@ angular.module('livingtownApp')
       console.log('taking picture');
       photo.takePhoto()
         .then(function(result) {
+          alert('took photo: ' + result);
           console.log('took photo: ' + result);
+        }, function(error) {
+          alert(error);
         });
     };
 
