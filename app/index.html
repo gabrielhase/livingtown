@@ -15,6 +15,7 @@
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
+
   <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
 </head>
   <body ng-app="livingtownApp">
@@ -32,7 +33,7 @@
 
     </div>
 
-
+    <script src="cordova.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="scripts/vendor/leaflet_numbered_markers.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -47,13 +48,13 @@
     <script src="scripts/services/geolocation.js"></script>
     <script src="scripts/services/mock_data.js"></script>
     <script src="scripts/services/persistence.js"></script>
+    <script src="scripts/services/photo.js"></script>
     <script src="scripts/services/cordovaReady.js"></script>
     <script src="scripts/models/message.js"></script>
     <!-- endbuild -->
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/moment/moment.js"></script>
-        <script src="bower_components/cordova/cordova.ios.js"></script>
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/jquery.scrollTo/jquery.scrollTo.js"></script>
         <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>

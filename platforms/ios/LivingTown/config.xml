@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.helloCordova" version="2.0.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="io.livingtown.*" version="2.0.0" xmlns="http://www.w3.org/ns/widgets">
     <name>Hello Cordova</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -26,4 +26,10 @@
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+    <plugins>
+        <plugin name="Camera" value="org.apache.cordova.core.camera.camera" />
+    </plugins>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
 </widget>

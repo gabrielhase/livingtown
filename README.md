@@ -37,6 +37,7 @@ Livingtown makes use of a whole bunch of libraries and services. A list of them 
   - JQuery
   - JQuery ScrollTo
   - Twitter Bootstrap
+  - Moment.js
 
 If all or any of these are unfamiliar you should probably get a high-level overview about each of them before coding on livingtown.
 

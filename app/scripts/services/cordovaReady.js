@@ -20,6 +20,25 @@ angular.module('livingtownApp')
       };
 
       document.addEventListener('deviceready', function () {
+
+        // mock a camera object if it is not there
+        if (!navigator.camera) {
+          alert('mocking camera');
+          navigator.camera = {
+            getPicture: function(callback1, callback2, options) {
+              return callback1("http://placehold.it/100x100");
+            }
+          }
+          window.Camera = {
+            PictureSourceType: {
+              PHOTOLIBRARY: 1
+            },
+            destinationType: {
+              FILE_URI: 1
+            }
+          }
+        }
+
         // apply fn with each set of arguments it was queued
         queue.forEach(function (args) {
           fn.apply(this, args);

@@ -39,7 +39,7 @@ angular.module('livingtownApp')
     $scope.getTimeIdentifier = function(marker) {
       var date = moment(marker.date);
       return date.fromNow();
-    }
+    };
 
     $scope.reLocate = function() {
       geolocation.locate()
@@ -79,7 +79,7 @@ angular.module('livingtownApp')
         setupMarkerListener(location);
       }, function(error) {
         if(error.type === 'notLocalizable') {
-          $location.path( "/needLocation" );
+          $location.path('/needLocation');
         } else {
           alert(error.message);
         }

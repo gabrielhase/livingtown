@@ -4,6 +4,8 @@ angular.module('livingtownApp', ['leaflet-directive', 'firebase'])
   .config(function ($routeProvider, $httpProvider, $locationProvider) {
     $routeProvider
       .when('/', {
+        //templateUrl: 'views/add.html',
+        //controller: 'AddCtrl'
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
@@ -23,5 +25,6 @@ angular.module('livingtownApp', ['leaflet-directive', 'firebase'])
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     // HTML 5 mode -> uses history API
-    return $locationProvider.html5Mode(true);
+    // NOTE: this is not working with cordova!!!
+    //return $locationProvider.html5Mode(true);
   });

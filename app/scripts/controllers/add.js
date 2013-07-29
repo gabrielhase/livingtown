@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('livingtownApp')
-  .controller('AddCtrl', function($scope, $rootScope, $location, geolocation, persistence) {
+  .controller('AddCtrl', function($scope, $rootScope, $location, geolocation, persistence, photo) {
 
     geolocation.locate()
       .then(function(location) {
@@ -26,6 +26,16 @@ angular.module('livingtownApp')
       });
 
     $scope.message = '';
+
+    $scope.takePhoto = function() {
+      console.log('taking picture');
+      photo.takePhoto()
+        .then(function(result) {
+          console.log('took photo: ' + result);
+        });
+    };
+
+    //$scope.takePhoto();
 
     $scope.addMessage = function() {
       $rootScope.messages.push({
