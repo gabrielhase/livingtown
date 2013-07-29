@@ -31,7 +31,8 @@ angular.module('livingtownApp')
       $rootScope.messages.push({
         lat: persistence.location.lat,
         lng: persistence.location.lng,
-        message: $scope.message
+        message: $scope.message,
+        date: new Date().getTime()
       })
 
       $scope.message = '';

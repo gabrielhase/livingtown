@@ -4,6 +4,9 @@
   Note: The messages are stored on the $rootScope so they can be:
   (1) accessed from all controllers
   (2) angularFire (firebase) has one point of control to update them
+  In order to change the Firebase url at runtime, e.g. when a user leaves
+  one town and enters another, we need to keep track of the unbind callback
+  as well which has to be called before attaching a new url.
 */
 angular.module('livingtownApp')
   .controller('MainCtrl', function ($scope, $rootScope, $location, geolocation, mockData, angularFire, persistence) {
@@ -33,6 +36,10 @@ angular.module('livingtownApp')
       $scope.center.lng = marker.lng;
     };
 
+    $scope.getTimeIdentifier = function(marker) {
+      var date = moment(marker.date);
+      return date.fromNow();
+    }
 
     $scope.reLocate = function() {
       geolocation.locate()
