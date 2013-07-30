@@ -44,8 +44,11 @@ angular.module('livingtownApp')
     };
 
     $scope.reLocate = function() {
-      geolocation.locate()
+      // upon hitting the button it should not take a cached location
+      $scope.showSpinner = true;
+      geolocation.locate({ maximumAge:1, timeout: 1000 })
       .then(function(location) {
+        $scope.showSpinner = false;
         if (persistence.location.city !== location.city ||
             persistence.location.state !== location.state) {
           persistence.init(location);
@@ -66,8 +69,11 @@ angular.module('livingtownApp')
 
 
     // locate the user on hitting the page
-    geolocation.locate()
+    // cache location for 1 minute, should be fine, even for moving users
+    $scope.showSpinner = true;
+    geolocation.locate({ maximumAge:60000, timeout: 1000 })
       .then(function(location) {
+        $scope.showSpinner = false;
         angular.extend($scope, {
           center: {
             lat: location.lat,

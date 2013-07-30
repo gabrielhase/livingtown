@@ -11,6 +11,11 @@
       <div style='position: absolute; right: 10px; top: 10px; z-index: 10000'>
         <button class='btn btn-default' ng-click='reLocate()'><span class='glyphicon glyphicon-screenshot'></span></button>
       </div>
+
+      <div id='spinner' ng-show='showSpinner' style='position: absolute; right: 40%; top: 40%; z-index: 10001'>
+        <img src='img/spinner.gif' alt='loading' />
+      </div>
+
       <leaflet defaults="defaults" center="center" height="240px"  markers="markers"></leaflet>
     </div>
 

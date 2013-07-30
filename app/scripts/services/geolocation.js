@@ -11,11 +11,10 @@ angular.module('livingtownApp')
     return {
 
 
-      locate: function() {
+      locate: function(options) {
         var that = this;
         var locationPromise = $q.defer();
-        // cache location for 1 minute, should be fine, even for moving users
-        that.getCurrentPosition({ maximumAge:60000, timeout: 1000 })
+        that.getCurrentPosition(options)
           .then(function(position){
             that.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
               .then(function(formattedResult) {

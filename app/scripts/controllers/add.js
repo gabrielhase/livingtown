@@ -11,7 +11,7 @@
 angular.module('livingtownApp')
   .controller('AddCtrl', function($scope, $rootScope, $location, geolocation, persistence, photo) {
 
-    geolocation.locate()
+    geolocation.locate({ maximumAge:60000, timeout: 1000 })
       .then(function(location) {
         if (persistence.location.city !== location.city ||
             persistence.location.state !== location.state) {
