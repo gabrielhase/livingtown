@@ -1,28 +1,36 @@
-<div style='width: 320px; position: relative' ng-show='located'>
-  <div class='well well-small' style='margin-bottom: 1px'>
-    <div class='clearfix' style='height: 40px;'>
-      <h3 style='float: left; margin-top: 0'>Livingtown</h3>
-      <a class='btn btn-primary' style='float: right' href='#/add'>Add Yours!</a>
-    </div>
-  </div>
-  <div style='position: relative'>
-    <div style='position: absolute; right: 10px; top: 10px; z-index: 10000'>
-      <a href class='btn btn-inverse' ng-click='reLocate()'><i class='icon-screenshot icon-white'></i></a>
-    </div>
-    <leaflet defaults="defaults" center="center" height="240px"  markers="markers"></leaflet>
-  </div>
-  <br/>
-  <ul class='unstyled' style='height: 240px; overflow: scroll' id='messageStream'>
-    <li ng-repeat='marker in messages' class='well' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='marker-{{$index + 1}}' ng-click='centerLocation(marker)' style='padding-left: 5px; padding-right: 5px'>
-      <div style='float: left; position: relative'>
-        <span class="badge" style='position: absolute; top: -18px; right: -10px'>{{$index + 1}}</span>
-        <img data-src="holder.js/50x50" class="img-rounded" alt="140x140" style="width: 50px; height: 50px; margin-top: -15px" src="{{marker.image}}">
+<div class='row' style='height: {{height*2}}px'>
+  <div class='col-sm-6' ng-show='located'>
+    <div class='well well-small' style='margin-bottom: 1px'>
+      <div class='row'>
+        <h3 class='col-6'>Livingtown</h3>
+        <a class='btn btn-primary col-6' href='#/add'>Add Yours!</a>
       </div>
+    </div>
 
-      <div style="position: relative; float: left; margin-left: 20px">
-        <span style='position: absolute; top: -15px; font-size: 0.7em'><em>{{getTimeIdentifier(marker)}}</em></span>
-        <span>{{marker.message}}</span>
+    <div style='position: relative'>
+      <div style='position: absolute; right: 10px; top: 10px; z-index: 10000'>
+        <button class='btn btn-default' ng-click='reLocate()'><span class='glyphicon glyphicon-screenshot'></span></button>
       </div>
-    </li>
-  </ul>
+      <leaflet defaults="defaults" center="center" height="240px"  markers="markers"></leaflet>
+    </div>
+
+  </div>
+  <div class='col-sm-6' style='overflow: scroll; height: {{height}}px' id='messageStream'>
+    <ul class='list-unstyled'>
+      <li ng-repeat='marker in messages' class='row panel' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='marker-{{$index + 1}}' ng-click='centerLocation(marker)'>
+
+        <div class='col-3 col-sm-3'>
+          <div style='position: relative'>
+            <span class='label label-info' style='position: absolute; top: -7px; left: -3px;'>{{$index + 1}}</span>
+            <img data-src="holder.js/50x50" class="img-rounded" alt="140x140" style="width: 50px; height: 50px;" src="{{marker.image}}">
+          </div>
+        </div>
+
+        <div class='col-9 col-sm-9'>
+          <div style='font-size: 0.7em'><em>{{getTimeIdentifier(marker)}}</em></div>
+          <span>{{marker.message}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

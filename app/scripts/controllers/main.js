@@ -15,6 +15,8 @@ angular.module('livingtownApp')
     $scope.center = {};
     $scope.markers = {};
 
+    $scope.height = $(window).height() / 2;
+
     // setup the angularFire connection to our firebase for this city
     var setupMarkerListener = function(location) {
       // get messages from firebase

@@ -37,9 +37,9 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
-      compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass:server']
+      recess: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*'],
+        tasks: ['recess:development']
       },
       livereload: {
         options: {
@@ -137,25 +137,26 @@ module.exports = function (grunt) {
         }]
       }
     },
-    compass: {
-      options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
-        importPath: '<%= yeoman.app %>/bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/styles/fonts',
-        relativeAssets: false
-      },
-      dist: {},
-      server: {
+    recess: {
+      development: {
         options: {
-          debugInfo: true
-        }
+          compile: true
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/styles',
+            src: ['*.less'],
+            dest: '.tmp/styles',
+            ext: '.css'
+          }, {
+            expand: true,
+            cwd: '<%= yeoman.app %>/components',
+            src: ['**/*.less'],
+            dest: '.tmp/styles',
+            ext: '.css'
+          }
+        ]
       }
     },
     // not used since Uglify task does concat,
@@ -211,27 +212,6 @@ module.exports = function (grunt) {
       //   }
       // }
     },
-    htmlmin: {
-      dist: {
-        options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
     // Put files not handled in other tasks here
     copy: {
       dist: {
@@ -247,6 +227,10 @@ module.exports = function (grunt) {
             'images/{,*/}*.{gif,webp,svg}',
             'styles/fonts/*',
             'scripts/vendor/**/*',
+            '*.html',
+            'views/*.html',
+            'plugins/**/*',
+            'phonegap.js',
             'cordova_plugins.js' // not having it there throws an error in cordova 3 which should be fixed with the next release: https://github.com/clelland/cordova-js/commit/c21a9f264af9e858e31b11aead43641e739749ff
           ]
         }, {
@@ -261,18 +245,15 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist',
-        'compass:server'
+        'coffee:dist'
       ],
       test: [
-        'coffee',
-        'compass'
+        'coffee'
       ],
       dist: [
         'coffee',
-        'compass:dist',
         'imagemin',
-        'htmlmin'
+        'recess'
       ]
     },
     karma: {
@@ -310,6 +291,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
+      'recess',
       'connect:livereload',
       'open',
       'watch'

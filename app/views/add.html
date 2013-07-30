@@ -1,21 +1,25 @@
-<div style="width: 320px">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="#/">«&nbsp;Back</a>
+<div class='row'>
+  <div class='col-12 col-sm-12 col-lg-12'>
+    <div class="navbar">
+      <a class="navbar-brand" href='#/'>«&nbsp;Back</a>
     </div>
-  </div>
-  <h3>I bet you got the next insider tip for this city!</h3>
-  <span stlye='font-size: 2em' class='badge'>1</span>
-  <br/>
-  <button class='btn btn-primary' ng-click='takePhoto()'>Take a photo</button>
-  <br/>
-  <span stlye='font-size: 2em' class='badge'>2</span>
-  <br/>
-  <form ng-submit="addMessage()" ng-show='located'>
-    <textarea ng-model="message" placeholder="140 characters to describe" required ngMaxlength='140'></textarea>
-    <input class="btn-primary" type="submit" value="add">
-  </form>
-  <canvas id="scaleCanvas" width="100" height="100" style='display: none'></canvas>
-  <!--<img id="image" ng-src="{{imageSrc}}" />-->
 
+    <form ng-submit='addMessage()' ng-show='located'>
+      <fieldset>
+        <legend>I bet you got the next insider tip for this city</legend>
+        <div class="form-group">
+          <label><span stlye='font-size: 2em' class='label'>1</span></label>
+          <button type='button' class='btn btn-primary' ng-click='takePhoto()'>Picture it!</button>
+        </div>
+        <div class="form-group">
+          <label for="message"><span stlye='font-size: 2em' class='label'>2</span></label>
+          <textarea ng-model='message' placeholder='add description' id='message' required ngMaxlength='140' style='width: 90%'></textarea>
+          <p class='help-block'>Keep your description short and precise.</p>
+        </div>
+        <button type='submit' class='btn btn-default'>Submit</button>
+      </fieldset>
+    </form>
+    <canvas id='scaleCanvas' width='100' height='100' style='display: none'></canvas>
+    <!--<img id="image" ng-src="{{imageSrc}}" />-->
+  </div>
 </div>
