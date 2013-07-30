@@ -170,7 +170,6 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -187,16 +186,6 @@ module.exports = function (grunt) {
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         dirs: ['<%= yeoman.dist %>']
-      }
-    },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
       }
     },
     cssmin: {
@@ -230,6 +219,7 @@ module.exports = function (grunt) {
             'scripts/vendor/**/*',
             '*.html',
             'views/*.html',
+            'images/**/*',
             'plugins/**/*',
             'phonegap.js',
             'cordova_plugins.js' // not having it there throws an error in cordova 3 which should be fixed with the next release: https://github.com/clelland/cordova-js/commit/c21a9f264af9e858e31b11aead43641e739749ff
@@ -253,7 +243,6 @@ module.exports = function (grunt) {
       ],
       dist: [
         'coffee',
-        'imagemin',
         'recess'
       ]
     },
