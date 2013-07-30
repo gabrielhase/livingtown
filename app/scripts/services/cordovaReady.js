@@ -21,20 +21,18 @@ angular.module('livingtownApp')
 
       document.addEventListener('deviceready', function () {
 
-        //alert(navigator.camera);
-        // mock a camera object if it is not there
-        if (!navigator.camera) {
-          alert('mocking camera');
+        // mock a camera object if it is a browser
+        if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+        //if (!navigator.camera) {
+          console.log('mocking camera');
           navigator.camera = {
             getPicture: function(callback1, callback2, options) {
-              return callback1("http://placehold.it/100x100");
-            }
-          }
-          window.Camera = {
+              return callback1("img/200x200.gif");
+            },
             PictureSourceType: {
               PHOTOLIBRARY: 1
             },
-            destinationType: {
+            DestinationType: {
               FILE_URI: 1
             }
           }
