@@ -17,7 +17,7 @@ angular.module('livingtownApp')
             persistence.location.state !== location.state) {
           // re-setup angularFire connection to push message to the right town
           var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
-          angularFire(url, $rootScope, 'messages', [])
+          angularFire(url, $rootScope, 'messages', []).startAt().limit(100)
           .then(function(unbind){
             if ($rootScope.angularReset) $rootScope.angularReset();
             $rootScope.angularReset = unbind;
