@@ -13,7 +13,8 @@ angular.module('livingtownApp')
           console.log('fail');
           photoPromise.reject('failed to take a picture');
         }, {quality: 50,
-          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY, // TODO: change this when going to the actual phone
+          //sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY, // TODO: change this when going to the actual phone
+          sourceType: navigator.camera.PictureSourceType.CAMERA,
           destinationType: navigator.camera.DestinationType.FILE_URI});
         return photoPromise.promise;
       })
