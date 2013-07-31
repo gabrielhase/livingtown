@@ -34,3 +34,30 @@ L.NumberedDivIcon = L.Icon.extend({
     return null;
   }
 });
+
+/* Done for Livingtown */
+L.UserPositionIcon = L.Icon.extend({
+    options: {
+    iconUrl: 'images/current-position.png',
+    shadowUrl: null,
+    iconSize: new L.Point(25, 25),
+    iconAnchor: new L.Point(25, 25),
+    className: 'leaflet-div-icon'
+  },
+
+  createIcon: function () {
+    var div = document.createElement('div');
+    var img = this._createImg(this.options['iconUrl']);
+    var numdiv = document.createElement('div');
+    numdiv.setAttribute ( "class", "number" );
+    numdiv.innerHTML = this.options['number'] || '';
+    div.appendChild ( img );
+    div.appendChild ( numdiv );
+    this._setIconStyles(div, 'icon');
+    return div;
+  },
+
+  createShadow: function () {
+    return null;
+  }
+});

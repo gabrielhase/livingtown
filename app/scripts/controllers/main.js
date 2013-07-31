@@ -27,7 +27,7 @@ angular.module('livingtownApp')
           $rootScope.angularReset = unbind;
           $rootScope.angularFireIsRunning = true;
           $rootScope.$watch('messages', function() {
-            drawMarkers($scope, $rootScope);
+            drawMarkers($scope, $rootScope, persistence);
           });
         });
     };
@@ -62,7 +62,7 @@ angular.module('livingtownApp')
         if(error.type === 'notLocalizable') {
           $location.path( "/needLocation" );
         } else {
-          alert(error.message);
+          $location.path( "/needLocation" ); // TODO: maybe pass custom error messages here
         }
       });
     };
@@ -82,7 +82,7 @@ angular.module('livingtownApp')
           },
           located: true
         });
-        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope); // when coming back from another page
+        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope, persistence); // when coming back from another page
         persistence.init(location);
         setupMarkerListener(location);
       }, function(error) {
@@ -103,7 +103,7 @@ var scrollCallback = function(marker) {
 };
 
 
-function drawMarkers($scope, $rootScope) {
+function drawMarkers($scope, $rootScope, persistence) {
   // reformat messages for leaflet markers
   var markers = {};
   for (var i = 0; i < $rootScope.messages.length; i++) {
@@ -111,5 +111,14 @@ function drawMarkers($scope, $rootScope) {
     markers[i].id = i + 1;
     markers[i].clickCallback = scrollCallback;
   }
+
+  // the users position
+  markers[i+1] = {
+    type: 'user',
+    lat: persistence.location.lat,
+    lng: persistence.location.lng,
+    icon: 'images/current-position.png'
+  };
+
   $scope.markers = markers;
 }

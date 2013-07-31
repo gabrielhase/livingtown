@@ -18,9 +18,6 @@ angular.module('livingtownApp')
           .then(function(position){
             that.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
               .then(function(formattedResult) {
-                // TODO: for the mock data
-                //formattedResult.city = "Cambridge";
-                //formattedResult.state = "MA";
                 // add the lat, lng
                 formattedResult.lat = position.coords.latitude;
                 formattedResult.lng = position.coords.longitude;

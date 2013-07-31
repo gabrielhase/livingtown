@@ -27,7 +27,7 @@ angular.module('livingtownApp')
           console.log('mocking camera');
           navigator.camera = {
             getPicture: function(callback1, callback2, options) {
-              return callback1("images/200x200.gif");
+              return callback1("images/no-image.png");
             },
             PictureSourceType: {
               PHOTOLIBRARY: 1

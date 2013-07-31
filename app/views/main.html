@@ -1,9 +1,9 @@
 <div class='row' style='height: {{height*2}}px'>
   <div class='col-sm-6' ng-show='located'>
-    <div class='well well-small' style='margin-bottom: 1px'>
+    <div style='margin-bottom: 1px'>
       <div class='row'>
-        <h3 class='col-6'>Livingtown</h3>
-        <a class='btn btn-primary col-6' href='#/add'>Add Yours!</a>
+        <h4 class='col-7'><img src='images/logo.jpg' height="30px" alt='logo'>Living<b>town</b></h4>
+        <a class='btn btn-primary col-4' href='#/add' style='margin-top: 10px;'><span class='glyphicon glyphicon-map-marker'>&nbsp;Add!</span></a>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
         <div class='col-3 col-sm-3'>
           <div style='position: relative'>
             <span class='label label-info' style='position: absolute; top: -7px; left: -3px;'>{{$index + 1}}</span>
-            <img data-src="holder.js/50x50" class="img-rounded" alt="140x140" style="width: 50px; height: 50px;" src="{{marker.image}}">
+            <img class='img-thumbnail' style='width: 50px; height: 50px;' ng-src='{{marker.image}}'>
           </div>
         </div>
 

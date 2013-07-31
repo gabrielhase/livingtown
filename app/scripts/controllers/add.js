@@ -35,7 +35,7 @@ angular.module('livingtownApp')
 
     $scope.message = '';
     $scope.imageSrc = '';
-    $scope.imageData = '';
+    $scope.imageData = 'images/no-image.png'; // the default, if the user doesn't upload
 
     $scope.takePhoto = function() {
       photo.takePhoto()

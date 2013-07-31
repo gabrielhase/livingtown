@@ -361,12 +361,21 @@ leafletDirective.directive('leaflet', [
                     micon = buildIcon();
                 }
 
-                var marker = new L.marker(data,
-                    {
-                        icon: new L.NumberedDivIcon({number: data.id}),
-                        draggable: data.draggable ? true : false
-                    }
-                );
+                if (data.type === 'user') {
+                  var marker = new L.marker(data,
+                  {
+                    icon: new L.UserPositionIcon(),
+                    draggable: data.draggable ? true: false
+                  }
+                  );
+                } else {
+                  var marker = new L.marker(data,
+                      {
+                          icon: new L.NumberedDivIcon({number: data.id}),
+                          draggable: data.draggable ? true : false
+                      }
+                  );
+                }
 
                 /*
                 if (data.message) {

@@ -14,6 +14,8 @@ You are using the livingtown code for another project? That's awesome! Let me kn
   4. Run `grunt server` to start the development server at port 9000 (livereload)
   5. Run `grunt build` to build the files needed by XCode for production use
 
+NOTE: Since there is no camera in the browser, the camera interface is mocked. Clicking the photo button will just upload the no-image placeholder.
+
 ### XCode
 
   1. Install XCode and the Command Line Utilities
@@ -30,7 +32,7 @@ I feel humbled to say that there are no tests yet...
 
 Livingtown makes use of a whole bunch of libraries and services. A list of them can be found below:
 
-  - Phonegap (cordova for ios)
+  - Phonegap (cordova for ios with the camera plugin)
   - Angular.JS
   - Firebase (used through angularFire)
   - Leaflet (used through angular-leaflet-diretive)
