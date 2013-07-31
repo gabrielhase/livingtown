@@ -26,10 +26,12 @@ angular.module('livingtownApp')
         .then(function(unbind) {
           if ($rootScope.angularReset) $rootScope.angularReset();
           $rootScope.angularReset = unbind;
+          if (!$rootScope.angularFireIsRunning) { // only setup the scope watch the first time
+            $rootScope.$watch('messages', function() {
+              drawMarkers($scope, $rootScope, persistence);
+            });
+          }
           $rootScope.angularFireIsRunning = true;
-          $rootScope.$watch('messages', function() {
-            drawMarkers($scope, $rootScope, persistence);
-          });
         });
     };
 
@@ -50,13 +52,10 @@ angular.module('livingtownApp')
       geolocation.locate({ maximumAge:1, timeout: 1000 })
       .then(function(location) {
         $scope.showSpinner = false;
-        if (persistence.location.city !== location.city ||
-            persistence.location.state !== location.state) {
-          persistence.init(location);
-          setupMarkerListener(location);
-          drawMarkers($scope, $rootScope, persistence);
-        }
-        // just change the location on the map
+        // redraw the markers
+        persistence.init(location);
+        setupMarkerListener(location);
+        // change the location on the map
         $scope.center.lat = location.lat;
         $scope.center.lng = location.lng;
 
@@ -92,7 +91,7 @@ angular.module('livingtownApp')
         if(error.type === 'notLocalizable') {
           $location.path('/needLocation');
         } else {
-          alert(error.message);
+          $location.path('/needLocation');
         }
       });
   });
