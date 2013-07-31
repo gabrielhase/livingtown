@@ -15,7 +15,7 @@ angular.module('livingtownApp')
     $scope.center = {};
     $scope.markers = {};
 
-    $scope.height = $(window).height() / 2;
+    $scope.height = ($(window).height() / 2) - 40;
 
     // setup the angularFire connection to our firebase for this city
     var setupMarkerListener = function(location) {
@@ -54,6 +54,7 @@ angular.module('livingtownApp')
             persistence.location.state !== location.state) {
           persistence.init(location);
           setupMarkerListener(location);
+          drawMarkers($scope, $rootScope, persistence);
         }
         // just change the location on the map
         $scope.center.lat = location.lat;
@@ -83,9 +84,10 @@ angular.module('livingtownApp')
           },
           located: true
         });
-        if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope, persistence); // when coming back from another page
+        //if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope, persistence); // when coming back from another page
         persistence.init(location);
         setupMarkerListener(location);
+        drawMarkers($scope, $rootScope, persistence);
       }, function(error) {
         if(error.type === 'notLocalizable') {
           $location.path('/needLocation');
@@ -105,6 +107,7 @@ var scrollCallback = function(marker) {
 
 
 function drawMarkers($scope, $rootScope, persistence) {
+  if ($rootScope.messages === undefined) return;
   // reformat messages for leaflet markers
   var markers = {};
   for (var i = 0; i < $rootScope.messages.length; i++) {

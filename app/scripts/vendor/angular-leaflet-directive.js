@@ -8,7 +8,7 @@ leafletDirective.directive('leaflet', [
     '$http', '$log', '$parse', '$rootScope', function ($http, $log, $parse, $rootScope) {
 
     var defaults = {
-        maxZoom: 14,
+        maxZoom: 16,
         minZoom: 1,
         doubleClickZoom: true,
         tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',

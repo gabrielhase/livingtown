@@ -23,7 +23,6 @@ angular.module('livingtownApp')
 
         // mock a camera object if it is a browser
         if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-        //if (!navigator.camera) {
           console.log('mocking camera');
           navigator.camera = {
             getPicture: function(callback1, callback2, options) {
