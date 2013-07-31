@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0BD413F8E3B944E4870381C8 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E31609BF7754CD88093D540 /* CDVCamera.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
@@ -53,6 +52,7 @@
 		AA6E21D617A89B7100C51245 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA6E21D517A89B7100C51245 /* Default-568h@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
+		16EA464DE20D4396AF87DCC9 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEC3C95788848428CB254E0 /* CDVLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +128,8 @@
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		F013AEF743F94FAAA065EA45 /* CDVCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCamera.h; path = org.apache.cordova.core.camera/CDVCamera.h; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = HelloWorld/config.xml; sourceTree = "<group>"; };
+		BCEC3C95788848428CB254E0 /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "org.apache.cordova.core.geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		22A76C5FCCED49CCB79ED35A /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "org.apache.cordova.core.geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +286,8 @@
 				F013AEF743F94FAAA065EA45 /* CDVCamera.h */,
 				D00652F86C3E447394040B85 /* CDVJpegHeaderWriter.h */,
 				537AA2D6F7D54A31BA72C862 /* CDVExif.h */,
+				BCEC3C95788848428CB254E0 /* CDVLocation.m */,
+				22A76C5FCCED49CCB79ED35A /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = HelloWorld/Plugins;
@@ -458,6 +462,7 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				0BD413F8E3B944E4870381C8 /* CDVCamera.m in Sources */,
 				4D4EF7DB5C0349359F1C63CA /* CDVJpegHeaderWriter.m in Sources */,
+				16EA464DE20D4396AF87DCC9 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
