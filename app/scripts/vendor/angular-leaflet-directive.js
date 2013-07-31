@@ -50,7 +50,8 @@ leafletDirective.directive('leaflet', [
             defaults: '=defaults',
             paths: '=paths',
             tiles: '=tiles',
-            events: '=events'
+            events: '=events',
+            //height: '=height'
         },
         template: '<div class="angular-leaflet-map"></div>',
         link: function ($scope, element, attrs /*, ctrl */) {
@@ -67,6 +68,12 @@ leafletDirective.directive('leaflet', [
                 element.css('height', attrs.height);
             }
 
+/*
+            $scope.$watch('height', function(newVal, oldVal){
+              element.css('height', $scope.height + 'px');
+              console.log("height changed from " + oldVal + " to " + newVal);
+            });
+*/
 
             $scope.leaflet = {};
 

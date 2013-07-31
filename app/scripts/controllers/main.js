@@ -21,7 +21,8 @@ angular.module('livingtownApp')
     var setupMarkerListener = function(location) {
       // get messages from firebase
       var url = 'https://livingtown.firebaseio.com/messages/' + location.city + '-' + location.state;
-      angularFire(url, $rootScope, 'messages', []).startAt().limit(100)
+      var ref = new Firebase(url).startAt().limit(100);
+      angularFire(ref, $rootScope, 'messages', [])
         .then(function(unbind) {
           if ($rootScope.angularReset) $rootScope.angularReset();
           $rootScope.angularReset = unbind;
