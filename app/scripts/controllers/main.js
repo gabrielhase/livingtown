@@ -30,6 +30,8 @@ angular.module('livingtownApp')
             $rootScope.$watch('messages', function() {
               drawMarkers($scope, $rootScope, persistence);
             });
+          } else {
+            drawMarkers($scope, $rootScope, persistence);
           }
           $rootScope.angularFireIsRunning = true;
         });
