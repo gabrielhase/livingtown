@@ -51,7 +51,7 @@ angular.module('livingtownApp')
     $scope.reLocate = function() {
       // upon hitting the button it should not take a cached location
       $scope.showSpinner = true;
-      geolocation.locate({ maximumAge:1, timeout: 1000 })
+      geolocation.locate({ maximumAge:10, timeout: 1000 })
       .then(function(location) {
         $scope.showSpinner = false;
         // redraw the markers
@@ -60,12 +60,12 @@ angular.module('livingtownApp')
         // change the location on the map
         $scope.center.lat = location.lat;
         $scope.center.lng = location.lng;
-
+        //alert('reloacated' + location.lat + ' ' + location.lng );
       }, function(error) {
         if(error.type === 'notLocalizable') {
-          $location.path( "/needLocation" );
+          $location.path( "#/needLocation" );
         } else {
-          $location.path( "/needLocation" ); // TODO: maybe pass custom error messages here
+          $location.path( "#/needLocation" ); // TODO: maybe pass custom error messages here
         }
       });
     };
@@ -89,6 +89,7 @@ angular.module('livingtownApp')
         setupMarkerListener(location);
         drawMarkers($scope, $rootScope, persistence);
 
+
         // move with the phone
         navigator.geolocation.watchPosition(function(position) {
           $scope.center.lat = position.coords.latitude;
@@ -97,11 +98,12 @@ angular.module('livingtownApp')
           console.log('error while watching device position');
         }, { maximumAge: 10, timeout: 1000 });
 
+
       }, function(error) {
         if(error.type === 'notLocalizable') {
-          $location.path('/needLocation');
+          $location.path('#/needLocation');
         } else {
-          $location.path('/needLocation');
+          $location.path('#/needLocation');
         }
       });
   });
