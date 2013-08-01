@@ -4,11 +4,29 @@
   Locates a users device
 */
 angular.module('livingtownApp')
-  .factory('geolocation', function($rootScope, $http, $q, cordovaReady) {
+  .factory('geolocation', function($rootScope, $http, $q, cordovaReady, persistence) {
 
     var googleEndpoint = 'http://maps.googleapis.com/maps/api/geocode/json';
 
     return {
+
+
+      watchLocation: cordovaReady(function ($scope, options, watchPromise) {
+        // move with the phone
+        navigator.geolocation.watchPosition(function(position) {
+          geolocation.getLocationIdentifier(position.coords.latitude, position.coords.longitude)
+            .then(function(location) { // in the browser there is never a callback
+              $scope.$apply(function(){
+                $scope.center.lat = location.lat;
+                $scope.center.lng = location.lng;
+                persistence.init(location);
+                $scope.setupMarkerListener(location);
+              });
+            });
+        }, function(error) {
+          console.log('error while watching device position');
+        }, options);
+      }),
 
 
       locate: function(options) {
