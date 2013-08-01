@@ -10,7 +10,7 @@ You are using the livingtown code for another project? That's awesome! Let me kn
 
   1. Install node.js and npm (http://nodejs.org/)
   2. Install grunt using `npm install -g grunt-cli`
-  3. From the root of the project run `npm install`
+  3. From the root of the project run `npm install` and `bower install`
   4. Run `grunt server` to start the development server at port 9000 (livereload)
   5. Run `grunt build` to build the files needed by XCode for production use
   6. Run `grunt server:dist` to start a local server that tests the minified and optimized dist version.
@@ -25,6 +25,7 @@ IE8 and below are not supported.
 
   1. Install XCode and the Command Line Utilities
   2. Open the XCode project in platforms/ios
+  3. Install the dependencies with `npm install` and `bower install` (see 3 above)
   3. Build the production dist folder by running `grunt build` from the root folder (see 5 above)
   4. Build the project to the simulator or your device if you have a valid provisioning profile
 
