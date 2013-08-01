@@ -9,7 +9,7 @@ You are using the livingtown code for another project? That's awesome! Let me kn
 ### Web
 
   1. Install node.js and npm (http://nodejs.org/)
-  2. Install grunt using `npm install -g grunt-cli`
+  2. Install bower and grunt using `npm install -g bower` and `npm install -g grunt-cli`
   3. From the root of the project run `npm install` and `bower install`
   4. Run `grunt server` to start the development server at port 9000 (livereload)
   5. Run `grunt build` to build the files needed by XCode for production use

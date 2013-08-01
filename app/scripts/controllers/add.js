@@ -35,11 +35,7 @@ angular.module('livingtownApp')
         }
         $scope.located = true; // show the form only when the location is correct
       }, function(error) {
-        if(error.type === 'notLocalizable') {
-          $location.path( "#/needLocation" );
-        } else {
-          $location.path( "#/needLocation" );
-        }
+        $location.path("/location-error");
       });
 
     $scope.takePhoto = function() {

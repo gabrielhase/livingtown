@@ -4,12 +4,10 @@ angular.module('livingtownApp', ['leaflet-directive', 'firebase'])
   .config(function ($routeProvider, $httpProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        //templateUrl: 'views/add.html',
-        //controller: 'AddCtrl'
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/needLocation', {
+      .when('/location-error', {
         templateUrl: 'views/location.html',
         controller: 'LocationCtrl'
       })

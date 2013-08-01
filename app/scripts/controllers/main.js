@@ -64,11 +64,8 @@ angular.module('livingtownApp')
         $scope.center.lng = location.lng;
         //alert('reloacated' + location.lat + ' ' + location.lng );
       }, function(error) {
-        if(error.type === 'notLocalizable') {
-          $location.path( "#/needLocation" );
-        } else {
-          $location.path( "#/needLocation" ); // TODO: maybe pass custom error messages here
-        }
+        // NOTE: for now this is just one error page, but of course one could be more specific
+        $location.path("/location-error");
       });
     };
 
@@ -90,11 +87,7 @@ angular.module('livingtownApp')
         persistence.init(location);
         setupMarkerListener(location);
       }, function(error) {
-        if(error.type === 'notLocalizable') {
-          $location.path('#/needLocation');
-        } else {
-          $location.path('#/needLocation');
-        }
+        $location.path("/location-error");
       });
     // NOTE: this only does something for the device or the simulator, in the browser it is mocked with an empty function since the browser has no capabilities for watching the position
     geolocation.watchLocation($scope, { maximumAge: 10, timeout: 1000 });
