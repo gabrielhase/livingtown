@@ -35,6 +35,8 @@ angular.module('livingtownApp')
               FILE_URI: 1
             }
           }
+          // mock the position watch empty
+          navigator.geolocation.watchPosition = function() {};
         }
 
         // apply fn with each set of arguments it was queued
