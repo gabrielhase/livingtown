@@ -13,16 +13,26 @@ You are using the livingtown code for another project? That's awesome! Let me kn
   3. From the root of the project run `npm install`
   4. Run `grunt server` to start the development server at port 9000 (livereload)
   5. Run `grunt build` to build the files needed by XCode for production use
+  6. Run `grunt server:dist` to start a local server that tests the minified and optimized dist version.
 
-NOTE: Since there is no camera in the browser, the camera interface is mocked. Clicking the photo button will just upload the no-image placeholder.
+NOTE: Since there is no camera in the browser, the camera interface is mocked. Clicking the photo button will just upload the no-image placeholder and do nothing otherwise.
+
+The web version of livingtown is hosted via github: http://gabrielhase.github.io/livingtown/
+
+IE8 and below are not supported.
 
 ### XCode
 
   1. Install XCode and the Command Line Utilities
   2. Open the XCode project in platforms/ios
-  3. Build the project to the simulator or your device if you have a valid provisioning profile
+  3. Build the production dist folder by running `grunt build` from the root folder (see 5 above)
+  4. Build the project to the simulator or your device if you have a valid provisioning profile
 
 There is currently only an iOS port. Feel free to port the project to Android or another platform (I love pull requests).
+
+Since the camera shutter takes some time to shut itself down (iOS quirk described on phonegap doc) the promise-based interface cordovaReady is not working there. For the moment the code doesn't wait for cordovaReady since the second screen can only be reached when cordova is ready anyway.
+
+The simulator driving simulation works only if geolocation.watchPosition is called at least once. On the actual device this is not needed.
 
 ### Testing
 
