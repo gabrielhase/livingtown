@@ -68,7 +68,6 @@ angular.module('livingtownApp')
       });
     };
 
-
     // locate the user on hitting the page
     // cache location for 1 minute, should be fine, even for moving users
     $scope.showSpinner = true;
@@ -87,6 +86,15 @@ angular.module('livingtownApp')
         persistence.init(location);
         setupMarkerListener(location);
         drawMarkers($scope, $rootScope, persistence);
+
+        // move with the phone
+        navigator.geolocation.watchPosition(function(position) {
+          $scope.center.lat = position.coords.latitude;
+          $scope.center.lng = position.coords.longitude;
+        }, function(error) {
+          console.log('error while watching device position');
+        }, { maximumAge: 10, timeout: 1000 });
+
       }, function(error) {
         if(error.type === 'notLocalizable') {
           $location.path('/needLocation');
