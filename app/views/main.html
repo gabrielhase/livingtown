@@ -22,7 +22,7 @@
   </div>
   <div class='col-sm-6' style='overflow: scroll; height: {{height}}px' id='messageStream'>
     <ul class='list-unstyled'>
-      <li ng-repeat='marker in messages' class='row panel' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='marker-{{$index + 1}}' ng-click='centerLocation(marker)'>
+      <li ng-repeat="marker in messages | orderBy:'date':true" class='row panel' data-lat='{{marker.lat}}' data-lng='{{marker.lng}}' id='marker-{{$index + 1}}' ng-click='centerLocation(marker)'>
 
         <div class='col-5 col-sm-3'>
           <div style='position: relative'>
