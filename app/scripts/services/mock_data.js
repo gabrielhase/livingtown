@@ -2,6 +2,8 @@
 
 /*
   A set of mock data retrieved from http://bostoneventsinsider.com/
+  Currently not used in the app (live data is received from firebase),
+  but handy when developing.
 */
 angular.module('livingtownApp')
   .factory('mockData', function() {

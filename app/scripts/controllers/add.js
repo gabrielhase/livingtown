@@ -40,10 +40,10 @@ angular.module('livingtownApp')
 
     $scope.takePhoto = function() {
       // NOTE: due to an iOS quirk when closing the camera window this call can not
-      // go through the cordovaReady promise based interface (on the phone the call
+      // go through the cordovaReady promise-based interface (on the phone the call
       // would not trigger).
       // In a production app I would make a separate cordovaReady interface for the camera, but since this
-      // is on the second screen anyway and there is no way to get here without cordove
+      // is on the second screen anyway and there is no way to get here without cordova
       // being ready I think it's safe to call it directly.
       navigator.camera.getPicture(function(result) {
         $scope.imageSrc = result;

@@ -1,7 +1,11 @@
 'use strict';
 
 /*
-  Locates a users device
+  Service that geolocates a users device.
+  Does geolocation through the navigator interface (Device with phonegapp will
+  use native API).
+  Uses GoogleMaps API to find the current town and state.
+  The locate method is the entry point for calls.
 */
 angular.module('livingtownApp')
   .factory('geolocation', function($rootScope, $http, $q, cordovaReady, persistence) {

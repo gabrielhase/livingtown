@@ -1,6 +1,8 @@
 'use strict';
 
 /*
+  Renders the positioning on the map as well as the persisted messages for
+  the current town.
   Note: The messages are stored on the $rootScope so they can be:
   (1) accessed from all controllers
   (2) angularFire (firebase) has one point of control to update them
@@ -62,7 +64,6 @@ angular.module('livingtownApp')
         // change the location on the map
         $scope.center.lat = location.lat;
         $scope.center.lng = location.lng;
-        //alert('reloacated' + location.lat + ' ' + location.lng );
       }, function(error) {
         // NOTE: for now this is just one error page, but of course one could be more specific
         $location.path("/location-error");
@@ -70,7 +71,7 @@ angular.module('livingtownApp')
     };
 
     // locate the user on hitting the page
-    // cache location for 1 minute, should be fine, even for moving users
+    // cache location for 1 minute, should be fine for not too quickly moving users (e.g. by foot)
     $scope.showSpinner = true;
     geolocation.locate({ maximumAge:60000, timeout: 1000 })
       .then(function(location) {
@@ -83,7 +84,6 @@ angular.module('livingtownApp')
           },
           located: true
         });
-        //if ($rootScope.angularFireIsRunning) drawMarkers($scope, $rootScope, persistence); // when coming back from another page
         persistence.init(location);
         setupMarkerListener(location);
       }, function(error) {
@@ -105,7 +105,7 @@ angular.module('livingtownApp')
       if ($rootScope.messages === undefined) return;
       // reformat messages for leaflet markers
       // NOTE: when clicking really quickly then there is a possibility for running
-      // conditions on the async callbacks, thus this ensures thread safety.
+      // conditions on the async callbacks, thus this ensures "thread" safety.
       if (!$rootScope.drawingMarkersInProgress) {
         $rootScope.drawingMarkersInProgress = true;
         var markers = {};
@@ -127,5 +127,4 @@ angular.module('livingtownApp')
         $rootScope.drawingMarkersInProgress = false;
       }
     }
-
   });
